@@ -16,8 +16,7 @@ app.use(express.json());
 let client;
 let db;
 
-const uri = 'mongodb+srv://ntumbaelvie:3LVI3_nTuMBa2006%40@cluster0.mze1d5m.mongodb.net/?retryWrites=true&w=majority';
-
+const uri = 'mongodb+srv://ntumbaelvie:3LVI3_nTuMBa2006%40@cluster0.mze1d5m.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
 async function connectToMongo() {
   try {
     console.log("Connecting to MongoDB...");
@@ -182,5 +181,5 @@ app.delete('/deleteuser/:email', async (req, res) => {
 
 app.listen(PORT, '0.0.0.0', async () => {
   await connectToMongo();
-  console.log(`Server is running on http://3.81.249.217:${PORT}`);
+  console.log(`Server is running on http://3.90.242.200:${PORT}`);
 });
