@@ -1,4 +1,12 @@
 {
+  "name": "wonkanet",
+  "version": "1.0.0",
+  "description": "wonkanet-api-test projet",
+  "main": "index.mjs",
+  "type": "module",
+  "scripts": {
+      "test": "mocha"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
