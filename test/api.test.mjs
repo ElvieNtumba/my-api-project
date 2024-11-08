@@ -1,10 +1,10 @@
 import { expect, use } from 'chai';
 import chaiHttp from 'chai-http';
-import chai from 'chai';
+// import chai from 'chai';
 
 const chai = use(chaiHttp);
 
-const serverUrl = 'http://54.237.234.198:8000'; // Replace with your server URL
+const serverUrl = 'http://52.205.209.10:8000'; // Replace with your server URL
 
 describe('API Endpoints Tests', () => {
   // Test GET /users
@@ -24,118 +24,162 @@ describe('API Endpoints Tests', () => {
 });
 
   // Test GET /users/:email (get a single user by ID)
-  // describe('GET /users/:email', () => {
-  //   it('should retrieve a single user by email', (done) => {
-  //     chai.request.execute(serverUrl)
-  //       .get('/users/giakatuf@gmail.com')  // Use an email that exists in your database
-  //       .end((err, res) => {
-  //         if (err) {
-  //           done(err);
-  //         } else {
-  //           expect(res).to.have.status(200);
-  //           expect(res.body.email).to.equal('giakatuf@gmail.com');
-  //           done();
-  //         }
-  //       });
-  //   });    
-  // });
+  describe('GET /users/:email', () => {
+    it('should retrieve a single user by email', (done) => {
+      chai.request.execute(serverUrl)
+        .get('/users/giakatuf@gmail.com')  // Use an email that exists in your database
+        .end((err, res) => {
+          if (err) {
+            done(err);
+          } else {
+            expect(res).to.have.status(200);
+            expect(res.body.email).to.equal('giakatuf@gmail.com');
+            done();
+          }
+        });
+    });    
+  });
 
+  describe('POST /USERS', () => {
+    it('should create a new user', (done) => {
+      const newUser = {
+        username: 'ntumbaelvie@gmail.com',
+        email: 'ntumbaelvie@gmail.com',
+        password: 'password234',
+      };
+    
+      chai.request(app)
+        .post('/USERS')
+        .send(newUser)
+        .end((err, res) => {
+          if (err) return done(err);
+    
+          // Check that the response has status code 201 (Created)
+          expect(res).to.have.status(201);
+    
+          // Check for the correct message
+          expect(res.body).to.have.property('message').that.equals('User created successfully');
+    
+          // Check for the user data
+          expect(res.body.user).to.have.property('username').that.equals(newUser.username);
+          expect(res.body.user).to.have.property('email').that.equals(newUser.email);
+          expect(res.body.user).to.have.property('_id');  // Check for the user ID
+    
+          done();
+        });
+    });
+    
+  });
+  
 
   // Test GET /cart
-  // describe('GET /cart', () => {
-  //   it('should retrieve the cart items', (done) => {
-  //     chai.request.execute(serverUrl)
-  //       .get('/cart')
-  //       .end((err, res) => {
-  //         if (err) {
-  //           done(err);
-  //         } else {
-  //           expect(res).to.have.status(200);
-  //           expect(res.body).to.be.an('array');
-  //           done();
-  //         }
-  //       });
-  //   });
-  // });
+  describe('GET /cart', () => {
+    it('should retrieve the cart items', (done) => {
+      chai.request.execute(serverUrl)
+        .get('/cart')
+        .end((err, res) => {
+          if (err) {
+            done(err);
+          } else {
+            expect(res).to.have.status(200);
+            expect(res.body).to.be.an('array');
+            done();
+          }
+        });
+    });
+  });
 
   // // Test POST /cart
-  // describe('POST /cart', () => {
-  //   it('should add a new item to the cart', (done) => {
-  //     const cartItem = { productId:"1001", quantity: 2 }; // Sample cart item data
-  //     chai.request.execute(serverUrl)
-  //       .post('/cart')
-  //       .send(cartItem)
-  //       .end((err, res) => {
-  //         if (err) {
-  //           done(err);
-  //         } else {
-  //           console.log(res.body)
-  //           expect(res).to.have.status(201);
-  //           expect(res.body).to.be.an('object');
-  //           expect(res.body).to.have.property('cartItemId').equal('672df4abde67d217415ebf6b');
-  //           // expect(res.body).to.have.property('quantity').equal(2);
-  //           done();
-  //         }
-  //       });
-  //   });
-  // });
+  describe('POST /cart', () => {
+    it('should add a new item to the cart', (done) => {
+      const newCartItem = {
+        _id: '6652e60b7cd388b684ef01bb', // Cart item ID
+        userId: '1000',                  // User ID
+        clothingType: 'baggy jeans',     // Clothing type
+        price: 'R350.00',                // Price
+        size: 'xs',                      // Size
+        color: 'blue',                   // Color
+        quantity: 1                      // Quantity
+      };
+    
+      chai.request.execute(serverUrl)
+        .post('/cart')  // Assuming POST /cart is the endpoint
+        .send(newCartItem)  // Send the cart item
+        .end((err, res) => {
+          if (err) return done(err);
+    
+          // Check if the response has a status code of 201 (created)
+          expect(res).to.have.status(201);  // Change expected status to 201
+    
+          // Check that the response contains a message indicating success
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('Item added to cart');
+    
+          done();
+        });
+    });
+    
+    
+  });
 
   // Test GET /clothing
-  // describe('GET /clothing', () => {
-  //   it('should retrieve the list of clothing items', (done) => {
-  //     chai.request.execute(serverUrl)
-  //       .get('/clothing')
-  //       .end((err, res) => {
-  //         if (err) {
-  //           done(err);
-  //         } else {
-  //           expect(res).to.have.status(200);
-  //           expect(res.body).to.be.an('array');
-  //           done();
-  //         }
-  //       });
-  //   });
-  // });
+  describe('GET /clothing', () => {
+    it('should retrieve the list of clothing items', (done) => {
+      chai.request.execute(serverUrl)
+        .get('/clothing')
+        .end((err, res) => {
+          if (err) {
+            done(err);
+          } else {
+            expect(res).to.have.status(200);
+            expect(res.body).to.be.an('array');
+            done();
+          }
+        });
+    });
+  });
 
   // Test GET /clothing/:id (get a single clothing item by ID)
-  // describe('GET /clothing/:id', () => {
-  //   it('should retrieve a single clothing item by ID', (done) => {
-  //     const clothingId = '67890'; // Sample clothing ID, replace with a valid ID if needed
-  //     chai.request.execute(serverUrl)
-  //       .get(`/clothing/${clothingId}`)
-  //       .end((err, res) => {
-  //         if (err) {
-  //           done(err);
-  //         } else {
-  //           expect(res).to.have.status(200);
-  //           expect(res.body).to.be.an('object');
-  //           expect(res.body).to.have.property('_id').equal(clothingId);
-  //           done();
-  //         }
-  //       });
-  //   });
-  // });
+  describe('GET /clothing/:id', () => {
+    it('should retrieve a single clothing item by ID', (done) => {
+      chai.request.execute(serverUrl)
+        .get('/clothing/672e649fd09cf13f18e4c19b') // Use the correct ID
+        .end((err, res) => {
+          if (err) {
+            console.error("Error Response:", res.body);
+            return done(err);
+          }
+          expect(res).to.have.status(200);
+          expect(res.body).to.have.property('_id', '672e649fd09cf13f18e4c19b');
+          expect(res.body).to.have.property('name', 'T-shirt');
+          expect(res.body).to.have.property('size', 'M');
+          expect(res.body).to.have.property('price', 19.99);
+          done();
+        });
+    });
+    
+    
+  });
 
   // Test POST /clothing
-  // describe('POST /clothing', () => {
-  //   it('should add a new clothing item', (done) => {
-  //     const clothingItem = { name: 'T-shirt', size: 'M', price: 19.99 }; // Sample clothing item data
-  //     chai.request.execute(serverUrl)
-  //       .post('/clothing')
-  //       .send(clothingItem)
-  //       .end((err, res) => {
-  //         if (err) {
-  //           done(err);
-  //         } else {
-  //           expect(res).to.have.status(201);
-  //           expect(res.body).to.be.an('object');
-  //           expect(res.body).to.have.property('name').equal('T-shirt');
-  //           expect(res.body).to.have.property('size').equal('M');
-  //           expect(res.body).to.have.property('price').equal(19.99);
-  //           done();
-  //         }
-  //       });
-  //   });
-  // });
+  describe('POST /clothing', () => {
+    it('should add a new clothing item', (done) => {
+      chai.request.execute(serverUrl)
+        .post('/clothing')
+        .send({
+          name: 'T-shirt',
+          size: 'M',
+          price: 19.99
+        })
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.body).to.have.property('message', 'Clothing item added');
+          expect(res.body).to.have.property('clothingItemId');
+          done();
+        });
+    });
+    
+    
+  });
 
 });
