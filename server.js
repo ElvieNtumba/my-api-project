@@ -101,6 +101,7 @@ app.get('/users/:email', async (req, res) => {
     res.status(500).send('Error retrieving user');
   }
 });
+
 app.post('/users', async (req, res) => {
   const { username, email, password } = req.body;
 

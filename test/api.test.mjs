@@ -1,5 +1,6 @@
 import { expect, use } from 'chai';
 import chaiHttp from 'chai-http';
+// import request from 'supertest';
 // import chai from 'chai';
 
 const chai = use(chaiHttp);
@@ -40,55 +41,47 @@ describe('API Endpoints Tests', () => {
     });    
   });
 
-  describe('POST /USER', () => {
+  describe('POST /users', () => {
     it('should create a new user', (done) => {
       chai.request.execute(serverUrl)
-        .post('/USERS')
+        .post('/users')
         .send({
-          username: 'ntumbaelvie',
-          email: 'ntumbaelvie@gmail.com',
-          password: 'password123'
+          username: 'Test User',
+          email: 'testuser@example.com',
+          password: 'test123'
         })
         .end((err, res) => {
           if (err) {
-            console.error(err);  // Log error if it occurs
-            done(err);
-          } else {
-            console.log(res.body)
-            expect(res).to.have.status(201);  // Expect 201 status code for success
-            expect(res.body).to.have.property('message').eql('User registered successfully');
-            // expect(res.body).to.be.an('object');
-            expect(res.body).to.have.property('email');  // Ensure the response contains userId
-            done();
+            return done(err); // Pass the error to `done()`
           }
+          expect(res).to.have.status(201);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('message', 'User registered successfully');
+          expect(res.body).to.have.property('userId');
+          done();
         });
     });
-  });
   
-  describe('POST /USERS', () => {
     it('should not create a new user if email already exists', (done) => {
       chai.request.execute(serverUrl)
-        .post('/USERS')
+        .post('/users')
         .send({
-          username: 'ntumbaelvie',
-          email: 'ntumbaelvie@gmail.com', // Use an existing email
-          password: 'password123'
+          username: 'Duplicate User',
+          email: 'testuser@example.com', // Using the same email as the previous test
+          password: 'duplicate123'
         })
         .end((err, res) => {
           if (err) {
-            console.error(err);
-            done(err);
-          } else {
-            console.log(res.body)
-            expect(res).to.have.status(409);  // Expect 409 status for conflict
-            expect(res.body).to.have.property('error').eql('User already exists');
-            // expect(res.body).to.be.an('object');
-            expect(res.body).to.have.property('email');
-            done();
+            return done(err); // Pass the error to `done()`
           }
+          expect(res).to.have.status(409);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('error', 'User already exists');
+          done();
         });
     });
-  });
+  });  
+  
 
   // Test GET /cart
   describe('GET /cart', () => {
