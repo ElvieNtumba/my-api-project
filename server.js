@@ -107,25 +107,31 @@ app.post('/USERS', async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
-    const usersCollection = db.collection('USERS');
-    const existingUser = await usersCollection.findOne({ email });
+    // Check if the user already exists
+    const existingUser = await User.findOne({ email });
 
     if (existingUser) {
       return res.status(409).json({ error: 'User already exists' });
     }
 
-    const result = await usersCollection.insertOne({
+    // Create a new user without password hashing
+    const newUser = new User({
       username,
       email,
-      password
+      password // Storing the plain-text password (not recommended)
     });
 
-    res.status(201).json({ message: 'User registered successfully', userId: result.insertedId });
+    // Save the user to the database
+    const result = await newUser.save();
+
+    // Return success response
+    res.status(201).json({ message: 'User registered successfully', userId: result._id });
   } catch (error) {
-    console.error('Error during user registration:', error); // Log the error for debugging
+    console.error('Error during user registration:', error);
     res.status(500).json({ error: 'Failed to register user' });
   }
 });
+
 
 // Update a user
 app.put('/user', async (req, res) => {

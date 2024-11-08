@@ -1,0 +1,353 @@
+{
+  "stats": {
+    "suites": 8,
+    "tests": 7,
+    "passes": 7,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-11-08T20:48:16.099Z",
+    "end": "2024-11-08T20:48:22.535Z",
+    "duration": 6436,
+    "testsRegistered": 7,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "5617bc91-c1e2-49d7-b0e1-c00e2e21e98b",
+      "title": "",
+      "fullFile": "/home/elvie/Documents/Wonkanet react/wonkanet-store/my-api-project/test/api.test.mjs",
+      "file": "/test/api.test.mjs",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "f8958acd-a7aa-400c-bb86-51544b4f91ee",
+          "title": "API Endpoints Tests",
+          "fullFile": "/home/elvie/Documents/Wonkanet react/wonkanet-store/my-api-project/test/api.test.mjs",
+          "file": "/test/api.test.mjs",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "46550ea0-e2bb-49c7-86d4-810b2295538f",
+              "title": "GET /users",
+              "fullFile": "/home/elvie/Documents/Wonkanet react/wonkanet-store/my-api-project/test/api.test.mjs",
+              "file": "/test/api.test.mjs",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "should retrieve the list of users",
+                  "fullTitle": "API Endpoints Tests GET /users should retrieve the list of users",
+                  "timedOut": false,
+                  "duration": 920,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "chai.request.execute(serverUrl)\n.get('/users')\n.end((err, res) => {\n  if (err) {\n    return done(err); // Pass the error to `done()`\n  }\n  expect(res).to.have.status(200);\n  expect(res.body).to.be.an('array');\n  done(); \n    });",
+                  "err": {},
+                  "uuid": "ecbd435f-b870-41d8-983c-0e1e5885799f",
+                  "parentUUID": "46550ea0-e2bb-49c7-86d4-810b2295538f",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "ecbd435f-b870-41d8-983c-0e1e5885799f"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 920,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "d9be848c-0aec-43f7-b249-4be8288b40c3",
+              "title": "GET /users/:email",
+              "fullFile": "/home/elvie/Documents/Wonkanet react/wonkanet-store/my-api-project/test/api.test.mjs",
+              "file": "/test/api.test.mjs",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "should retrieve a single user by email",
+                  "fullTitle": "API Endpoints Tests GET /users/:email should retrieve a single user by email",
+                  "timedOut": false,
+                  "duration": 854,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "chai.request.execute(serverUrl)\n  .get('/users/giakatuf@gmail.com')  // Use an email that exists in your database\n  .end((err, res) => {\n    if (err) {\n      done(err);\n    } else {\n      expect(res).to.have.status(200);\n      expect(res.body.email).to.equal('giakatuf@gmail.com');\n      done();\n    }\n  });",
+                  "err": {},
+                  "uuid": "de96a0ca-3075-499d-b728-9473eb1a650d",
+                  "parentUUID": "d9be848c-0aec-43f7-b249-4be8288b40c3",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "de96a0ca-3075-499d-b728-9473eb1a650d"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 854,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "cf63cd68-e864-4977-8a91-e8e18e1cd32b",
+              "title": "GET /cart",
+              "fullFile": "/home/elvie/Documents/Wonkanet react/wonkanet-store/my-api-project/test/api.test.mjs",
+              "file": "/test/api.test.mjs",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "should retrieve the cart items",
+                  "fullTitle": "API Endpoints Tests GET /cart should retrieve the cart items",
+                  "timedOut": false,
+                  "duration": 881,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "chai.request.execute(serverUrl)\n  .get('/cart')\n  .end((err, res) => {\n    if (err) {\n      done(err);\n    } else {\n      expect(res).to.have.status(200);\n      expect(res.body).to.be.an('array');\n      done();\n    }\n  });",
+                  "err": {},
+                  "uuid": "bee0ee52-8966-4357-8e92-a7a9edea7097",
+                  "parentUUID": "cf63cd68-e864-4977-8a91-e8e18e1cd32b",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "bee0ee52-8966-4357-8e92-a7a9edea7097"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 881,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "75684744-5182-4ce6-b8d3-eeb0fd851419",
+              "title": "POST /cart",
+              "fullFile": "/home/elvie/Documents/Wonkanet react/wonkanet-store/my-api-project/test/api.test.mjs",
+              "file": "/test/api.test.mjs",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "should add a new item to the cart",
+                  "fullTitle": "API Endpoints Tests POST /cart should add a new item to the cart",
+                  "timedOut": false,
+                  "duration": 981,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const newCartItem = {\n  _id: '6652e60b7cd388b684ef01bb', // Cart item ID\n  userId: '1000',                  // User ID\n  clothingType: 'baggy jeans',     // Clothing type\n  price: 'R350.00',                // Price\n  size: 'xs',                      // Size\n  color: 'blue',                   // Color\n  quantity: 1                      // Quantity\n};\n    \nchai.request.execute(serverUrl)\n  .post('/cart')  // Assuming POST /cart is the endpoint\n  .send(newCartItem)  // Send the cart item\n  .end((err, res) => {\n    if (err) return done(err);\n    \n    // Check if the response has a status code of 201 (created)\n    expect(res).to.have.status(201);  // Change expected status to 201\n    \n    // Check that the response contains a message indicating success\n    expect(res.body).to.have.property('message');\n    expect(res.body.message).to.equal('Item added to cart');\n    \n    done();\n  });",
+                  "err": {},
+                  "uuid": "bd30e38a-6fb8-4d58-8639-065245cb3ae5",
+                  "parentUUID": "75684744-5182-4ce6-b8d3-eeb0fd851419",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "bd30e38a-6fb8-4d58-8639-065245cb3ae5"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 981,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "39fed7a1-aa93-4a17-b8f4-8d0bb661a914",
+              "title": "GET /clothing",
+              "fullFile": "/home/elvie/Documents/Wonkanet react/wonkanet-store/my-api-project/test/api.test.mjs",
+              "file": "/test/api.test.mjs",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "should retrieve the list of clothing items",
+                  "fullTitle": "API Endpoints Tests GET /clothing should retrieve the list of clothing items",
+                  "timedOut": false,
+                  "duration": 934,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "chai.request.execute(serverUrl)\n  .get('/clothing')\n  .end((err, res) => {\n    if (err) {\n      done(err);\n    } else {\n      expect(res).to.have.status(200);\n      expect(res.body).to.be.an('array');\n      done();\n    }\n  });",
+                  "err": {},
+                  "uuid": "c46fcb2a-525a-409a-8b11-0dc34ae337b9",
+                  "parentUUID": "39fed7a1-aa93-4a17-b8f4-8d0bb661a914",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "c46fcb2a-525a-409a-8b11-0dc34ae337b9"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 934,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "516d07a3-335a-4e40-a15d-bdf70d0cdc54",
+              "title": "GET /clothing/:id",
+              "fullFile": "/home/elvie/Documents/Wonkanet react/wonkanet-store/my-api-project/test/api.test.mjs",
+              "file": "/test/api.test.mjs",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "should retrieve a single clothing item by ID",
+                  "fullTitle": "API Endpoints Tests GET /clothing/:id should retrieve a single clothing item by ID",
+                  "timedOut": false,
+                  "duration": 901,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "chai.request.execute(serverUrl)\n  .get('/clothing/672e649fd09cf13f18e4c19b') // Use the correct ID\n  .end((err, res) => {\n    if (err) {\n      console.error(\"Error Response:\", res.body);\n      return done(err);\n    }\n    expect(res).to.have.status(200);\n    expect(res.body).to.have.property('_id', '672e649fd09cf13f18e4c19b');\n    expect(res.body).to.have.property('name', 'T-shirt');\n    expect(res.body).to.have.property('size', 'M');\n    expect(res.body).to.have.property('price', 19.99);\n    done();\n  });",
+                  "err": {},
+                  "uuid": "7bd2bd0d-c430-40a6-9b43-061de26001fa",
+                  "parentUUID": "516d07a3-335a-4e40-a15d-bdf70d0cdc54",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "7bd2bd0d-c430-40a6-9b43-061de26001fa"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 901,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "5ed3380d-5f42-4c61-afd9-c4421ca349c7",
+              "title": "POST /clothing",
+              "fullFile": "/home/elvie/Documents/Wonkanet react/wonkanet-store/my-api-project/test/api.test.mjs",
+              "file": "/test/api.test.mjs",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "should add a new clothing item",
+                  "fullTitle": "API Endpoints Tests POST /clothing should add a new clothing item",
+                  "timedOut": false,
+                  "duration": 935,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "chai.request.execute(serverUrl)\n  .post('/clothing')\n  .send({\n    name: 'T-shirt',\n    size: 'M',\n    price: 19.99\n  })\n  .end((err, res) => {\n    if (err) return done(err);\n    expect(res.body).to.have.property('message', 'Clothing item added');\n    expect(res.body).to.have.property('clothingItemId');\n    done();\n  });",
+                  "err": {},
+                  "uuid": "7102cd96-d934-49ba-b777-6abc9e2307f4",
+                  "parentUUID": "5ed3380d-5f42-4c61-afd9-c4421ca349c7",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "7102cd96-d934-49ba-b777-6abc9e2307f4"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 935,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "10.8.2"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.2.0"
+    }
+  }
+}
