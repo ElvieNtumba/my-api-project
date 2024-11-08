@@ -102,36 +102,42 @@ app.get('/users/:email', async (req, res) => {
   }
 });
 
-// Add a new user using Mongoose model
 app.post('/USERS', async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
     // Check if the user already exists
     const existingUser = await User.findOne({ email });
-
     if (existingUser) {
+      console.log('User already exists with email:', email);
       return res.status(409).json({ error: 'User already exists' });
     }
 
-    // Create a new user without password hashing
+    // Validate required fields
+    if (!username || !email || !password) {
+      console.log('Missing fields:', req.body);
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    // Create a new user without password hashing (if you still want plain-text password)
     const newUser = new User({
       username,
       email,
-      password // Storing the plain-text password (not recommended)
+      password // Storing the plain-text password
     });
 
     // Save the user to the database
     const result = await newUser.save();
 
     // Return success response
+    console.log('User created successfully:', result);
     res.status(201).json({ message: 'User registered successfully', userId: result._id });
   } catch (error) {
+    // Log the error for debugging
     console.error('Error during user registration:', error);
     res.status(500).json({ error: 'Failed to register user' });
   }
 });
-
 
 // Update a user
 app.put('/user', async (req, res) => {
