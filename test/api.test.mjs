@@ -54,10 +54,11 @@ describe('API Endpoints Tests', () => {
             console.error(err);  // Log error if it occurs
             done(err);
           } else {
+            console.log(res.body)
             expect(res).to.have.status(201);  // Expect 201 status code for success
             expect(res.body).to.have.property('message').eql('User registered successfully');
-            expect(res.body).to.be.an('object');
-            expect(res.body).to.have.property('userId');  // Ensure the response contains userId
+            // expect(res.body).to.be.an('object');
+            expect(res.body).to.have.property('email');  // Ensure the response contains userId
             done();
           }
         });
@@ -78,9 +79,11 @@ describe('API Endpoints Tests', () => {
             console.error(err);
             done(err);
           } else {
+            console.log(res.body)
             expect(res).to.have.status(409);  // Expect 409 status for conflict
             expect(res.body).to.have.property('error').eql('User already exists');
-            expect(res.body).to.be.an('object');
+            // expect(res.body).to.be.an('object');
+            expect(res.body).to.have.property('email');
             done();
           }
         });

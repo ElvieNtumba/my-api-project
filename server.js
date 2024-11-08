@@ -101,19 +101,17 @@ app.get('/users/:email', async (req, res) => {
     res.status(500).send('Error retrieving user');
   }
 });
-
-app.post('/USER', async (req, res) => {
+app.post('/users', async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
     // Check if the user already exists
-    const usersCollection = db.collection('USERS');
-    const existingUser = await  usersCollection.findOne({ email });
+    const usersCollection = mongoose.connection.collection('users');
+    const existingUser = await usersCollection.findOne({ email });
     if (existingUser) {
       console.log('User already exists with email:', email);
       return res.status(409).json({ error: 'User already exists' });
     }
-
 
     // Create a new user without password hashing (if you still want plain-text password)
     const newUser = new User({
@@ -126,10 +124,10 @@ app.post('/USER', async (req, res) => {
     const savedUser = await newUser.save();
     console.log('User created successfully:', savedUser);
     return res.status(201).json({ message: 'User registered successfully', userId: savedUser._id });
- } catch (error) {
+  } catch (error) {
     // Log the error for debugging
     console.error('Error during user registration:', error);
-    res.status(500).json({ error: 'Failed to register user' });
+    return res.status(500).json({ error: 'Failed to register user' });
   }
 });
 
