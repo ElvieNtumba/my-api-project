@@ -42,13 +42,9 @@ describe('API Endpoints Tests', () => {
 
   describe('POST /USERS', () => {
     it('should create a new user', (done) => {
-      const newUser = {
-        username: 'ntumbaelvie@gmail.com',
-        email: 'ntumbaelvie@gmail.com',
-        password: 'password234',
-      };
-    
+
       chai.request.execute(serverUrl)
+      
       .post('/USERS')
       .send({
         username: 'ntumbaelvie@gmail.com',

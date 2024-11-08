@@ -104,19 +104,27 @@ app.get('/users/:email', async (req, res) => {
 
 // Add a new user using Mongoose model
 app.post('/USERS', async (req, res) => {
+  const { username, email, password } = req.body;
+
   try {
-    const newUser = new UserModel(req.body);
-    await newUser.save();
-    console.log('User created:', newUser);  // Log the created user
-    res.status(201).json(newUser); // Return 201 status with the new user
+    const usersCollection = db.collection('USERS');
+    const existingUser = await usersCollection.findOne({ email });
+
+    if (existingUser) {
+      return res.status(409).json({ error: 'User already exists' });
+    }
+
+    const result = await usersCollection.insertOne({
+      username,
+      email,
+      password
+    });
+
+    res.status(201).json({ message: 'User registered successfully', userId: result.insertedId });
   } catch (error) {
-    console.error("Error saving user with Mongoose:", error); // Log the error
-    res.status(500).json({ error: error.message || 'Error saving user' }); // Send a detailed error message
+    res.status(500).json({ error: 'Failed to register user' });
   }
 });
-
-
-
 
 // Update a user
 app.put('/user', async (req, res) => {
