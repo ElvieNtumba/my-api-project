@@ -48,7 +48,7 @@ describe('API Endpoints Tests', () => {
         password: 'password234',
       };
     
-      chai.request(app)
+      chai.request.execute(serverUrl)
         .post('/USERS')
         .send(newUser)
         .end((err, res) => {

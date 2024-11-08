@@ -115,10 +115,11 @@ app.post('/USERS', async (req, res) => {
     console.error("Error saving user with Mongoose:", error);
     res.status(500).json({
       error: "Error saving user",
-      details: error.message
+      details: error.stack || error.message
     });
   }
 });
+
 
 
 // Update a user
