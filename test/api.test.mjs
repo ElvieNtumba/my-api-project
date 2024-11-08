@@ -3,7 +3,7 @@ import chaiHttp from 'chai-http';
 
 const chai = use(chaiHttp);
 
-const serverUrl = 'http://localhost:8000'; // Replace with your server URL
+const serverUrl = 'http://54.237.234.198:8000'; // Replace with your server URL
 
 describe('API Endpoints Tests', () => {
   // Test GET /users
