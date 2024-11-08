@@ -102,12 +102,13 @@ app.get('/users/:email', async (req, res) => {
   }
 });
 
-app.post('/USERS', async (req, res) => {
+app.post('/USER', async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
     // Check if the user already exists
-    const existingUser = await User.findOne({ email });
+    const usersCollection = db.collection('USERS');
+    const existingUser = await  usersCollection.findOne({ email });
     if (existingUser) {
       console.log('User already exists with email:', email);
       return res.status(409).json({ error: 'User already exists' });

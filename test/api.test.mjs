@@ -4,7 +4,7 @@ import chaiHttp from 'chai-http';
 
 const chai = use(chaiHttp);
 
-const serverUrl = 'http://3.90.151.167:8000'; // Replace with your server URL
+const serverUrl = 'http://52.70.106.63:8000'; // Replace with your server URL
 
 describe('API Endpoints Tests', () => {
   // Test GET /users
@@ -40,7 +40,7 @@ describe('API Endpoints Tests', () => {
     });    
   });
 
-  describe('POST /USERS', () => {
+  describe('POST /USER', () => {
     it('should create a new user', (done) => {
       chai.request.execute(serverUrl)
         .post('/USERS')
@@ -56,6 +56,7 @@ describe('API Endpoints Tests', () => {
           } else {
             expect(res).to.have.status(201);  // Expect 201 status code for success
             expect(res.body).to.have.property('message').eql('User registered successfully');
+            expect(res.body).to.be.an('object');
             expect(res.body).to.have.property('userId');  // Ensure the response contains userId
             done();
           }
@@ -79,6 +80,7 @@ describe('API Endpoints Tests', () => {
           } else {
             expect(res).to.have.status(409);  // Expect 409 status for conflict
             expect(res.body).to.have.property('error').eql('User already exists');
+            expect(res.body).to.be.an('object');
             done();
           }
         });
@@ -99,6 +101,7 @@ describe('API Endpoints Tests', () => {
           } else {
             expect(res).to.have.status(400);  // Expect 400 for bad request (optional, depending on your validation)
             expect(res.body).to.have.property('error').eql('Failed to register user');
+            expect(res.body).to.be.an('object');
             done();
           }
         });
