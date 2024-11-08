@@ -249,5 +249,5 @@ app.post('/clothing', async (req, res) => {
 // Start server
 app.listen(PORT, '0.0.0.0', async () => {
   await connectToMongo();
-  console.log(`Server is running on http://54.89.36.150:${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
