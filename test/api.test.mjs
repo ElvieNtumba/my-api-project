@@ -42,27 +42,68 @@ describe('API Endpoints Tests', () => {
 
   describe('POST /USERS', () => {
     it('should create a new user', (done) => {
-
       chai.request.execute(serverUrl)
-      
-      .post('/USERS')
-      .send({
-        username: 'ntumbaelvie@gmail.com',
-        email: 'ntumbaelvie@gmail.com',
-        password: 'password234'
-      })
-      .end((err, res) => {
-        if (err) {
-          done(err);
-        } else {
-          expect(res).to.have.status(201); // Should return 201
-          expect(res.body).to.have.property('_id'); // Should include _id
-          done();
-        }
-      });
+        .post('/USERS')
+        .send({
+          username: 'ntumbaelvie',
+          email: 'ntumbaelvie@gmail.com',
+          password: 'password123'
+        })
+        .end((err, res) => {
+          if (err) {
+            console.error(err);  // Log error if it occurs
+            done(err);
+          } else {
+            expect(res).to.have.status(201);  // Expect 201 status code for success
+            expect(res.body).to.have.property('message').eql('User registered successfully');
+            expect(res.body).to.have.property('userId');  // Ensure the response contains userId
+            done();
+          }
+        });
     });
   });
   
+  describe('POST /USERS', () => {
+    it('should not create a new user if email already exists', (done) => {
+      chai.request.execute(serverUrl)
+        .post('/USERS')
+        .send({
+          username: 'ntumbaelvie',
+          email: 'ntumbaelvie@gmail.com', // Use an existing email
+          password: 'password123'
+        })
+        .end((err, res) => {
+          if (err) {
+            console.error(err);
+            done(err);
+          } else {
+            expect(res).to.have.status(409);  // Expect 409 status for conflict
+            expect(res.body).to.have.property('error').eql('User already exists');
+            done();
+          }
+        });
+    });
+  });
+
+  describe('POST /USERS', () => {
+    it('should return an error for missing fields', (done) => {
+      chai.request.execute(serverUrl)
+        .post('/USERS')
+        .send({
+          email: 'ntumbaelvie@gmail.com', // Missing username and password
+        })
+        .end((err, res) => {
+          if (err) {
+            console.error(err);
+            done(err);
+          } else {
+            expect(res).to.have.status(400);  // Expect 400 for bad request (optional, depending on your validation)
+            expect(res.body).to.have.property('error').eql('Failed to register user');
+            done();
+          }
+        });
+    });
+  });
 
   // Test GET /cart
   describe('GET /cart', () => {

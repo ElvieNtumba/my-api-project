@@ -122,6 +122,7 @@ app.post('/USERS', async (req, res) => {
 
     res.status(201).json({ message: 'User registered successfully', userId: result.insertedId });
   } catch (error) {
+    console.error('Error during user registration:', error); // Log the error for debugging
     res.status(500).json({ error: 'Failed to register user' });
   }
 });
