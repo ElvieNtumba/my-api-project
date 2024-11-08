@@ -1,30 +1,29 @@
 import express from 'express';
 import { MongoClient, ObjectId } from 'mongodb';
 import cors from 'cors';
+import dotenv from 'dotenv';
 
+dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8000;
-
 
 app.use(cors());
 app.use(express.json());
 
+const uri = process.env.MONGODB_URI;
 
-let client;
-let db;
-
+let db, client;
 async function connectToMongo() {
-  const uri = "mongodb+srv://ntumbaelvie:3LVI3_nTuMBa2006%40@cluster0.mze1d5m.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-  
   try {
-    const client = new MongoClient(uri);
+    console.log('Connecting to MongoDB...');
+    client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     await client.connect();
+    db = client.db("WONKANETclothingstoreDB");
     console.log("Connected to MongoDB");
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);
   }
 }
-
 
 // User Sign-up
 app.post('/wonkanet-app/signup', async (req, res) => {
