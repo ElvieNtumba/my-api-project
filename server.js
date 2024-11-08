@@ -127,12 +127,10 @@ app.post('/USERS', async (req, res) => {
     });
 
     // Save the user to the database
-    const result = await newUser.save();
-
-    // Return success response
-    console.log('User created successfully:', result);
-    res.status(201).json({ message: 'User registered successfully', userId: result._id });
-  } catch (error) {
+    const savedUser = await newUser.save();
+    console.log('User created successfully:', savedUser);
+    return res.status(201).json({ message: 'User registered successfully', userId: savedUser._id });
+ } catch (error) {
     // Log the error for debugging
     console.error('Error during user registration:', error);
     res.status(500).json({ error: 'Failed to register user' });
