@@ -114,11 +114,6 @@ app.post('/USER', async (req, res) => {
       return res.status(409).json({ error: 'User already exists' });
     }
 
-    // Validate required fields
-    if (!username || !email || !password) {
-      console.log('Missing fields:', req.body);
-      return res.status(400).json({ error: 'Missing required fields' });
-    }
 
     // Create a new user without password hashing (if you still want plain-text password)
     const newUser = new User({

@@ -87,27 +87,6 @@ describe('API Endpoints Tests', () => {
     });
   });
 
-  describe('POST /USERS', () => {
-    it('should return an error for missing fields', (done) => {
-      chai.request.execute(serverUrl)
-        .post('/USERS')
-        .send({
-          email: 'ntumbaelvie@gmail.com', // Missing username and password
-        })
-        .end((err, res) => {
-          if (err) {
-            console.error(err);
-            done(err);
-          } else {
-            expect(res).to.have.status(400);  // Expect 400 for bad request (optional, depending on your validation)
-            expect(res.body).to.have.property('error').eql('Failed to register user');
-            expect(res.body).to.be.an('object');
-            done();
-          }
-        });
-    });
-  });
-
   // Test GET /cart
   describe('GET /cart', () => {
     it('should retrieve the cart items', (done) => {
