@@ -176,13 +176,12 @@ app.get('/cart', async (req, res) => {
 
 // POST /cart - Add a new item to the cart
 app.post('/cart', async (req, res) => {
-  const { productId, quantity } = req.body;
+  const { cartItemId } = req.body;
 
   try {
     const cartCollection = db.collection('cart');
     const newCartItem = {
-      productId,
-      quantity
+      cartItemId
     };
     const result = await cartCollection.insertOne(newCartItem);
     res.status(201).json({ message: 'Item added to cart', cartItemId: result.insertedId });

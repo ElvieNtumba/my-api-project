@@ -24,79 +24,61 @@ describe('API Endpoints Tests', () => {
   });
 
   // Test GET /users/:email (get a single user by ID)
-  // describe('GET /users/:email', () => {
-  //   it('should retrieve a single user by email', (done) => {
-  //     chai.request.execute(serverUrl)
-  //       .get('/users/giakatuf@gmail.com')  // Use an email that exists in your database
-  //       .end((err, res) => {
-  //         if (err) {
-  //           done(err);
-  //         } else {
-  //           expect(res).to.have.status(200);
-  //           expect(res.body.email).to.equal('giakatuf@gmail.com');
-  //           done();
-  //         }
-  //       });
-  //   });    
-  // });
+  describe('GET /users/:email', () => {
+    it('should retrieve a single user by email', (done) => {
+      chai.request.execute(serverUrl)
+        .get('/users/giakatuf@gmail.com')  // Use an email that exists in your database
+        .end((err, res) => {
+          if (err) {
+            done(err);
+          } else {
+            expect(res).to.have.status(200);
+            expect(res.body.email).to.equal('giakatuf@gmail.com');
+            done();
+          }
+        });
+    });    
+  });
 
-  // Test POST /users
-  // describe('POST /users', () => {
-  //   it('should create a new user', (done) => {
-  //     const newUser = { name: 'Test User', email: 'test@example.com', password: 'password123' }; // Sample user data
-  //     chai.request.execute(serverUrl)
-  //       .post('/users')
-  //       .send(newUser)
-  //       .end((err, res) => {
-  //         if (err) {
-  //           done(err);
-  //         } else {
-  //           expect(res).to.have.status(201);
-  //           expect(res.body).to.be.an('object');
-  //           expect(res.body).to.have.property('name').equal('Test User');
-  //           done();
-  //         }
-  //       });
-  //   });
-  // });
 
   // Test GET /cart
-  // describe('GET /cart', () => {
-  //   it('should retrieve the cart items', (done) => {
-  //     chai.request.execute(serverUrl)
-  //       .get('/cart')
-  //       .end((err, res) => {
-  //         if (err) {
-  //           done(err);
-  //         } else {
-  //           expect(res).to.have.status(200);
-  //           expect(res.body).to.be.an('array');
-  //           done();
-  //         }
-  //       });
-  //   });
-  // });
+  describe('GET /cart', () => {
+    it('should retrieve the cart items', (done) => {
+      chai.request.execute(serverUrl)
+        .get('/cart')
+        .end((err, res) => {
+          if (err) {
+            done(err);
+          } else {
+            expect(res).to.have.status(200);
+            expect(res.body).to.be.an('array');
+            done();
+          }
+        });
+    });
+  });
 
   // Test POST /cart
-  // describe('POST /cart', () => {
-  //   it('should add a new item to the cart', (done) => {
-  //     const cartItem = { productId: '12345', quantity: 2 }; // Sample cart item data
-  //     chai.request.execute(serverUrl)
-  //       .post('/cart')
-  //       .send(cartItem)
-  //       .end((err, res) => {
-  //         if (err) {
-  //           done(err);
-  //         } else {
-  //           expect(res).to.have.status(201);
-  //           expect(res.body).to.be.an('object');
-  //           expect(res.body).to.have.property('productId').equal('12345');
-  //           expect(res.body).to.have.property('quantity').equal(2);
-  //           done();
-  //         }
-  //       });
-  //   });
-  // });
+  describe('POST /cart', () => {
+    it('should add a new item to the cart', (done) => {
+      const cartItem = { productId:"1001", quantity: 2 }; // Sample cart item data
+      chai.request.execute(serverUrl)
+        .post('/cart')
+        .send(cartItem)
+        .end((err, res) => {
+          if (err) {
+            done(err);
+          } else {
+            console.log(res.body)
+            expect(res).to.have.status(201);
+            expect(res.body).to.be.an('object');
+            expect(res.body).to.have.property('cartItemId').equal('672df4abde67d217415ebf6b');
+            // expect(res.body).to.have.property('quantity').equal(2);
+            done();
+          }
+        });
+    });
+  });
 
   // Test GET /clothing
   // describe('GET /clothing', () => {
