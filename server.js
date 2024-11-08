@@ -107,18 +107,14 @@ app.post('/USERS', async (req, res) => {
   try {
     const newUser = new UserModel(req.body);
     await newUser.save();
-    res.status(201).json({
-      message: "User created successfully",
-      user: newUser
-    });
+    console.log('User created:', newUser);  // Log the created user
+    res.status(201).json(newUser); // Return 201 status with the new user
   } catch (error) {
-    console.error("Error saving user with Mongoose:", error);
-    res.status(500).json({
-      error: "Error saving user",
-      details: error.stack || error.message
-    });
+    console.error("Error saving user with Mongoose:", error); // Log the error
+    res.status(500).json({ error: error.message || 'Error saving user' }); // Send a detailed error message
   }
 });
+
 
 
 

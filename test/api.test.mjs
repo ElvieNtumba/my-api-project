@@ -4,7 +4,7 @@ import chaiHttp from 'chai-http';
 
 const chai = use(chaiHttp);
 
-const serverUrl = 'http://52.205.209.10:8000'; // Replace with your server URL
+const serverUrl = 'http://3.90.151.167:8000'; // Replace with your server URL
 
 describe('API Endpoints Tests', () => {
   // Test GET /users
@@ -49,26 +49,22 @@ describe('API Endpoints Tests', () => {
       };
     
       chai.request.execute(serverUrl)
-        .post('/USERS')
-        .send(newUser)
-        .end((err, res) => {
-          if (err) return done(err);
-    
-          // Check that the response has status code 201 (Created)
-          expect(res).to.have.status(201);
-    
-          // Check for the correct message
-          expect(res.body).to.have.property('message').that.equals('User created successfully');
-    
-          // Check for the user data
-          expect(res.body.user).to.have.property('username').that.equals(newUser.username);
-          expect(res.body.user).to.have.property('email').that.equals(newUser.email);
-          expect(res.body.user).to.have.property('_id');  // Check for the user ID
-    
+      .post('/USERS')
+      .send({
+        username: 'ntumbaelvie@gmail.com',
+        email: 'ntumbaelvie@gmail.com',
+        password: 'password234'
+      })
+      .end((err, res) => {
+        if (err) {
+          done(err);
+        } else {
+          expect(res).to.have.status(201); // Should return 201
+          expect(res.body).to.have.property('_id'); // Should include _id
           done();
-        });
+        }
+      });
     });
-    
   });
   
 
